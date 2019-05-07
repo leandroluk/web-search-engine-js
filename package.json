@@ -1,0 +1,29 @@
+{
+  "name": "web-search-engine",
+  "version": "1.0.0",
+  "description": "\"Web search engine project make using ExpressJS and MongoDB\"",
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandroluk/web-search-engine-js.git"
+  },
+  "author": {
+    "name": "Leandro Santiago Gomes",
+    "email": "leandroluk@gmail.com",
+    "url": "https://github.com/leandroluk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leandroluk/web-search-engine-js/issues"
+  },
+  "homepage": "https://github.com/leandroluk/web-search-engine-js#readme",
+  "scripts": {},
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.5.6"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.3.27"
+  }
+}

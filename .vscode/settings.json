@@ -1,0 +1,8 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.rulers": [80, 120, 160],
+  "editor.detectIndentation": false,
+  "editor.autoIndent": true,
+  "prettier.singleQuote": true
+}
