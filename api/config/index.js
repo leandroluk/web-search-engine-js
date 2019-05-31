@@ -5,7 +5,6 @@ const morgan = require('morgan')
 
 const bodyParser = require('./bodyParser')
 const compression = require('./compression')
-const database = require('./database')
 
 module.exports = app => {
   app.use(cors())
@@ -15,5 +14,4 @@ module.exports = app => {
 
   bodyParser(app)
   app.use(compression)
-  database()
 }

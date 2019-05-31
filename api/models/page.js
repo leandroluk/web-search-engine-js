@@ -19,8 +19,12 @@ const Schema = new mongoose.Schema({
   tags: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: tagName
+  },
+  created_at: {
+    type: Number,
+    index: true,
+    default: Date.now
   }
 })
 
 module.exports = new mongoose.model(name, Schema, name)
-module.exports.name = name

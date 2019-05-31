@@ -1,7 +1,5 @@
-const page = require('./page')
-const tag = require('./tag')
-
 module.exports = {
-  [page.name]: page,
-  [tag.name]: tag
+  Page: require('./page'),
+  Scrap: require('./scrap'),
+  Tag: require('./tag'),
 }
