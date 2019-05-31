@@ -4,12 +4,16 @@ const config = require('./config')
 const router = require('./router')
 
 // initialize api instance
-const api = express.app()
+const app = express()
 
 // add configuration
-config(api)
+config(app)
 
 // add routes
-
+app.use(router)
 
 // serve api
+const port = process.env.port || 80
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
+})

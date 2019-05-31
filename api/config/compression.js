@@ -1,5 +1,4 @@
-import compression from 'compression'
-const compression = reuquire('compression')
+const compression = require('compression')
 
 const filter = (req, res) => {
   if (req.headers['x-no-compression']) {
