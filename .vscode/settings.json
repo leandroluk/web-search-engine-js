@@ -1,8 +1,16 @@
 {
+  // editor
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
-  "editor.rulers": [80, 120, 160],
+  "editor.rulers": [
+    80,
+    120,
+    160
+  ],
   "editor.detectIndentation": false,
   "editor.autoIndent": true,
-  "prettier.singleQuote": true
+  // prettier
+  "prettier.singleQuote": true,
+  // javascript
+  "javascript.validate.enable": false
 }

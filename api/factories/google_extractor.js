@@ -1,4 +1,4 @@
-(function () {
+(async () => setTimeout(() => {
   delete document.querySelector('script[name="axios"]')
 
   const script = document.createElement('script')
@@ -14,13 +14,18 @@
       }
     })
     const query = document.querySelector('input[name="q"]').value
-    const start = (new URL(location.href))
+    const url = new URL(location.href)
+    const start = url
       .search
       .substr(1)
       .split('&')
       .map(x => x.split('='))
       .reduce((a, b) => ({ ...a, [b[0]]: b[1] }), {}).start || 0
-    axios.post('http://localhost/@/push', { query, start, results })
+    axios
+      .post('http://localhost/@/push', { query, start, results })
+      .then(res => location.href = `${url.origin}${url.pathname}?q=${query}&start=${res.data.start}`)
+      .catch(err => [alert("deu pau!"), console.error(err)])
   }
+
   document.body.append(script)
-})()
+}, (1000)))()

@@ -3,9 +3,6 @@ const mongoose = require('mongoose')
 const name = 'Page'
 
 const Schema = new mongoose.Schema({
-  id: {
-    type: mongoose.Types.ObjectId,
-  },
   title: {
     type: String,
     index: true,
