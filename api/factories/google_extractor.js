@@ -1,10 +1,11 @@
 (function () {
   delete document.querySelector('script[name="axios"]')
-  var script = document.createElement('script');
+
+  const script = document.createElement('script')
   script.name = 'axios'
   script.src = 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'
-  script.onload = function () {
-    var results = [...document.querySelectorAll('.srg .g')].map(div => {
+  script.onload = () => {
+    const results = [...document.querySelectorAll('.srg .g')].map(div => {
       const a = div.querySelector('.r a')
       return {
         url: a.href,
@@ -12,10 +13,14 @@
         description: div.querySelector('.s .st').innerText,
       }
     })
-    axios.post('http://localhost/@/push', {
-      query: document.querySelector('input[name="q"]').value,
-      results
-    })
+    const query = document.querySelector('input[name="q"]').value
+    const start = (new URL(location.href))
+      .search
+      .substr(1)
+      .split('&')
+      .map(x => x.split('='))
+      .reduce((a, b) => ({ ...a, [b[0]]: b[1] }), {}).start || 0
+    axios.post('http://localhost/@/push', { query, start, results })
   }
   document.body.append(script)
 })()
