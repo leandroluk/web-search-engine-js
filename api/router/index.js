@@ -1,14 +1,29 @@
 const router = require('express').Router()
 const { tagerize } = require('../util')
-const { Scrap, ctx } = require('../models')
+const { Scrap, Page, ctx } = require('../models')
 
 router.get('/@/push', (req, res) => ctx(async () => {
 
-  if (!req.query.q) res.sendStatus(500)
+  const query = req.query.q.split(',').map(word => word.toLowerCase().trim())
 
-  const scraps = await Scrap.find()
+  if (!query) res.sendStatus(500)
 
-  res.send(JSON.stringify(scraps))
+  const start = req.query.start || 0
+  let scrap = await Scrap.find({ query })
+
+  if (!!scrap) {
+    const results = await Page
+      .find({ tags: { $in: query } })
+      .skip(start)
+      .limit(10)
+      .sort('')
+    console.log(results)
+    scrap = { ...scrap, results }
+  }
+
+  console.log(scrap)
+
+  res.send(JSON.stringify(scrap))
 
 }))
 
@@ -18,14 +33,22 @@ router.post('/@/push', (req, res) => ctx(async () => {
   let { query, start, results } = req.body
 
   // upsert Scrap
-  const scrap = await Scrap.findOne({ query }) || { query }
-  scrap.start = start + results.length
-  await Scrap.findOneAndUpdate({ query }, scrap, { upsert: true })
+  const s = await Scrap.findOne({ query }) || { query }
+  s.start = start + results.length
+  await Scrap.findOneAndUpdate({ query }, s, { upsert: true })
 
   // parse unique tags from itens 
-  results = results.map(x => ({ ...x, tags: tagerize(`${x.title} ${x.description}`) }))
-  console.log(results)
-  res.send(req.body)
+  results = results.map(x => ({
+    ...x,
+    tags: tagerize(`${x.title} ${x.description}`)
+  }))
+
+  // upsert pages to db async
+  results.forEach(async r => {
+    await Page.findOneAndUpdate({ url: r.url }, r, { upsert: true })
+  });
+
+  res.send(fromDb)
 
 }))
 

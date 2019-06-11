@@ -1,14 +1,16 @@
 const mongoose = require('mongoose')
-const tagName = require('./tag').name
 
 const name = 'Page'
 
 const Schema = new mongoose.Schema({
+  id: {
+    type: mongoose.Types.ObjectId,
+  },
   title: {
     type: String,
     index: true,
   },
-  link: {
+  url: {
     type: String,
     index: true,
   },
@@ -17,8 +19,8 @@ const Schema = new mongoose.Schema({
     index: true,
   },
   tags: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: tagName
+    type: [String],
+    index: true,
   },
   created_at: {
     type: Number,
