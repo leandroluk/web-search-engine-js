@@ -12,8 +12,8 @@
       const results = [...document.querySelectorAll('.srg .g')].map(div => {
 
         const a = div.querySelector('.r a')
-        const h3: a.querySelector('h3')
-        const sst: div.querySelector('.s .st')
+        const h3 = a.querySelector('h3')
+        const sst = div.querySelector('.s .st')
 
         return {
           url: a.href,
