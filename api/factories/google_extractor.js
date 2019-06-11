@@ -9,7 +9,7 @@
 
     script.onload = function () {
 
-      const results = [].concat(document.querySelectorAll('.srg .g')).map(function (div) {
+      const results = [...document.querySelectorAll('.srg .g')].map(div => {
         const a = div.querySelector('.r a')
         return {
           url: a.href,
@@ -24,10 +24,8 @@
         .search
         .substr(1)
         .split('&')
-        .map(function (keyVal) {
-          return keyVal.split('=')
-        })
-        .reduce(function (a, b) {
+        .map(keyVal => keyVal.split('='))
+        .reduce((a, b) => {
           const obj = {}
           obj[b[0]] = [b[1]]
           return Object.assign(a, obj)
@@ -35,10 +33,10 @@
 
       axios
         .post('http://localhost/@/push', { query, start, results })
-        .then(function (res) {
+        .then(res => {
           location.href = `${url.origin}${url.pathname}?q=${query}&start=${res.data.start}`
         })
-        .catch(function (err) => {
+        .catch(err => {
           alert("deu pau!")
           console.error(err)
         })
