@@ -10,11 +10,15 @@
     script.onload = function () {
 
       const results = [...document.querySelectorAll('.srg .g')].map(div => {
+
         const a = div.querySelector('.r a')
+        const h3: a.querySelector('h3')
+        const sst: div.querySelector('.s .st')
+
         return {
           url: a.href,
-          title: a.querySelector('h3').innerText,
-          description: div.querySelector('.s .st').innerText,
+          title: !!h3 ? h3.innerText : '',
+          description: !!sst ? sst.innerText : ''
         }
       })
 
